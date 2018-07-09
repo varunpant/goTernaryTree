@@ -31,6 +31,50 @@ func TestCreateTernaryTree(t *testing.T) {
 	}
 }
 
+func TestAddingDuplicateKeysInTree(t *testing.T) {
+	ttree := New()
+	ttree.add("Key1", "value1");
+	if ttree.size != 1 {
+		t.Errorf("Expected size to be %d, but got %d", 1, ttree.size)
+	}
+	val, _ := ttree.get("Key1")
+	if val != "value1" {
+		t.Errorf("Failed to get the valid value ,expected %s, recieved %s", "value1", val)
+	}
+	ttree.add("Key1", "value1");
+	if ttree.size != 1 {
+		t.Errorf("Expected size to be %d, but got %d", 1, ttree.size)
+	}
+}
+
+func TestAddingNullValuesInTree(t *testing.T) {
+	ttree := New()
+	ttree.add("Key1", nil);
+	if ttree.size != 1 {
+		t.Errorf("Expected size to be %d, but got %d", 1, ttree.size)
+	}
+	val, _ := ttree.get("Key1")
+
+	if val != nil {
+		t.Errorf("Expected value to be nil, but got %d", val)
+	}
+
+}
+
+func TestAddingNullKeysInTree(t *testing.T) {
+	ttree := New()
+	ttree.add("", "Empty Key");
+	if ttree.size != 0 {
+		t.Errorf("Expected size to be %d, but got %d", 1, ttree.size)
+	}
+
+	ttree.add(" ", "White space");
+	if ttree.size != 0 {
+		t.Errorf("Expected size to be %d, but got %d", 1, ttree.size)
+	}
+
+}
+
 func TestPrefixSearch(t *testing.T) {
 	ttree := New()
 	inputKeys := [12]string{"aback", "abacus", "abalone", "abandon", "abase", "abash", "abate", "abbas", "abbe", "abbey", "abbot", "Abbott"}

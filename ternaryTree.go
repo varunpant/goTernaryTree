@@ -2,6 +2,7 @@ package goTernaryTree
 
 import (
 	"errors"
+	"strings"
 )
 
 // Item represents a single object in the Node.
@@ -27,10 +28,12 @@ func New() *TernaryTree {
 
 //Adds new key to the tree.
 func (t *TernaryTree) add(key string, value Item) {
+	if len(strings.TrimSpace(key)) > 1 {
 
-	if !t.contains(key) {
-		t.size++
-		t.root = insert(t.root, key, value, 0)
+		if !t.contains(key) {
+			t.size++
+			t.root = insert(t.root, key, value, 0)
+		}
 	}
 
 }
@@ -47,7 +50,9 @@ func (t *TernaryTree) contains(key string) bool {
 
 //Gets saved key from the tree.
 func (t *TernaryTree) get(key string) (Item, error) {
-
+	if len(strings.TrimSpace(key)) < 1 {
+		return nil, nil
+	}
 	node := search(t.root, key, 0)
 	if node == nil {
 		return nil, errors.New("Key not found.")
