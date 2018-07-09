@@ -21,7 +21,7 @@ type TernaryTree struct {
 }
 
 //Creates new instance of TernaryTree
-func NewTernaryTree() *TernaryTree {
+func New() *TernaryTree {
 	return &TernaryTree{size: 0}
 }
 

@@ -7,7 +7,7 @@ import (
 )
 
 func TestCreateTernaryTree(t *testing.T) {
-	ttree := NewTernaryTree()
+	ttree := New()
 	inputKeys := [12]string{"aback", "abacus", "abalone", "abandon", "abase", "abash", "abate", "abbas", "abbe", "abbey", "abbot", "Abbott"}
 
 	for _, key := range inputKeys {
@@ -32,7 +32,7 @@ func TestCreateTernaryTree(t *testing.T) {
 }
 
 func TestPrefixSearch(t *testing.T) {
-	ttree := NewTernaryTree()
+	ttree := New()
 	inputKeys := [12]string{"aback", "abacus", "abalone", "abandon", "abase", "abash", "abate", "abbas", "abbe", "abbey", "abbot", "Abbott"}
 
 	for _, key := range inputKeys {
@@ -54,7 +54,7 @@ func TestPrefixSearch(t *testing.T) {
 }
 
 func TestWildcardMatch(t *testing.T) {
-	ttree := NewTernaryTree()
+	ttree := New()
 	inputKeys := [12]string{"aback", "abacus", "abalone", "abandon", "abase", "abash", "abate", "abbas", "abbe", "abbey", "abbot", "abbott"}
 
 	for _, key := range inputKeys {
@@ -124,7 +124,7 @@ func BenchmarkTernaryTreeInsert(b *testing.B) {
 		panic("file not found")
 	}
 
-	ttree := NewTernaryTree()
+	ttree := New()
 	b.ResetTimer()
 	b.Run(`InsertKeys`, func(b *testing.B) {
 		for _, key := range words {
