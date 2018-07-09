@@ -33,7 +33,7 @@ func TestCreateTernaryTree(t *testing.T) {
 
 func TestAddingDuplicateKeysInTree(t *testing.T) {
 	ttree := New()
-	ttree.add("Key1", "value1");
+	ttree.add("Key1", "value1")
 	if ttree.size != 1 {
 		t.Errorf("Expected size to be %d, but got %d", 1, ttree.size)
 	}
@@ -41,7 +41,7 @@ func TestAddingDuplicateKeysInTree(t *testing.T) {
 	if val != "value1" {
 		t.Errorf("Failed to get the valid value ,expected %s, recieved %s", "value1", val)
 	}
-	ttree.add("Key1", "value1");
+	ttree.add("Key1", "value1")
 	if ttree.size != 1 {
 		t.Errorf("Expected size to be %d, but got %d", 1, ttree.size)
 	}
@@ -49,7 +49,7 @@ func TestAddingDuplicateKeysInTree(t *testing.T) {
 
 func TestAddingNullValuesInTree(t *testing.T) {
 	ttree := New()
-	ttree.add("Key1", nil);
+	ttree.add("Key1", nil)
 	if ttree.size != 1 {
 		t.Errorf("Expected size to be %d, but got %d", 1, ttree.size)
 	}
@@ -63,12 +63,12 @@ func TestAddingNullValuesInTree(t *testing.T) {
 
 func TestAddingNullKeysInTree(t *testing.T) {
 	ttree := New()
-	ttree.add("", "Empty Key");
+	ttree.add("", "Empty Key")
 	if ttree.size != 0 {
 		t.Errorf("Expected size to be %d, but got %d", 1, ttree.size)
 	}
 
-	ttree.add(" ", "White space");
+	ttree.add(" ", "White space")
 	if ttree.size != 0 {
 		t.Errorf("Expected size to be %d, but got %d", 1, ttree.size)
 	}
