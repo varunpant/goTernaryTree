@@ -11,7 +11,7 @@ func TestCreateTernaryTree(t *testing.T) {
 	inputKeys := [12]string{"aback", "abacus", "abalone", "abandon", "abase", "abash", "abate", "abbas", "abbe", "abbey", "abbot", "Abbott"}
 
 	for _, key := range inputKeys {
-		ttree.add(key, key)
+		ttree.Add(key, key)
 	}
 
 	if ttree == nil {
@@ -24,7 +24,7 @@ func TestCreateTernaryTree(t *testing.T) {
 
 	for _, key := range inputKeys {
 
-		value, _ := ttree.get(key)
+		value, _ := ttree.Get(key)
 		if key != value {
 			t.Errorf("Failed to get the valid value for key %s from tree, recieved %s", key, value)
 		}
@@ -33,15 +33,15 @@ func TestCreateTernaryTree(t *testing.T) {
 
 func TestAddingDuplicateKeysInTree(t *testing.T) {
 	ttree := New()
-	ttree.add("Key1", "value1")
+	ttree.Add("Key1", "value1")
 	if ttree.size != 1 {
 		t.Errorf("Expected size to be %d, but got %d", 1, ttree.size)
 	}
-	val, _ := ttree.get("Key1")
+	val, _ := ttree.Get("Key1")
 	if val != "value1" {
 		t.Errorf("Failed to get the valid value ,expected %s, recieved %s", "value1", val)
 	}
-	ttree.add("Key1", "value1")
+	ttree.Add("Key1", "value1")
 	if ttree.size != 1 {
 		t.Errorf("Expected size to be %d, but got %d", 1, ttree.size)
 	}
@@ -49,11 +49,11 @@ func TestAddingDuplicateKeysInTree(t *testing.T) {
 
 func TestAddingNullValuesInTree(t *testing.T) {
 	ttree := New()
-	ttree.add("Key1", nil)
+	ttree.Add("Key1", nil)
 	if ttree.size != 1 {
 		t.Errorf("Expected size to be %d, but got %d", 1, ttree.size)
 	}
-	val, _ := ttree.get("Key1")
+	val, _ := ttree.Get("Key1")
 
 	if val != nil {
 		t.Errorf("Expected value to be nil, but got %d", val)
@@ -63,12 +63,12 @@ func TestAddingNullValuesInTree(t *testing.T) {
 
 func TestAddingNullKeysInTree(t *testing.T) {
 	ttree := New()
-	ttree.add("", "Empty Key")
+	ttree.Add("", "Empty Key")
 	if ttree.size != 0 {
 		t.Errorf("Expected size to be %d, but got %d", 1, ttree.size)
 	}
 
-	ttree.add(" ", "White space")
+	ttree.Add(" ", "White space")
 	if ttree.size != 0 {
 		t.Errorf("Expected size to be %d, but got %d", 1, ttree.size)
 	}
@@ -80,10 +80,10 @@ func TestPrefixSearch(t *testing.T) {
 	inputKeys := [12]string{"aback", "abacus", "abalone", "abandon", "abase", "abash", "abate", "abbas", "abbe", "abbey", "abbot", "Abbott"}
 
 	for _, key := range inputKeys {
-		ttree.add(key, key)
+		ttree.Add(key, key)
 	}
 
-	hits := ttree.prefixMatch("aba")
+	hits := ttree.PrefixMatch("aba")
 
 	if len(hits) != 7 {
 		t.Errorf("incorect prefix search hits from tree, expected 7, but recieved %d", len(hits))
@@ -102,11 +102,11 @@ func TestWildcardMatch(t *testing.T) {
 	inputKeys := [12]string{"aback", "abacus", "abalone", "abandon", "abase", "abash", "abate", "abbas", "abbe", "abbey", "abbot", "abbott"}
 
 	for _, key := range inputKeys {
-		ttree.add(key, key)
+		ttree.Add(key, key)
 	}
 
 	{
-		matches := ttree.wildcardMatch("...cus")
+		matches := ttree.WildcardMatch("...cus")
 		if len(matches) != 1 {
 			t.Errorf("Incorrect match count, expected %d, but got %d", 1, len(matches))
 		}
@@ -116,7 +116,7 @@ func TestWildcardMatch(t *testing.T) {
 	}
 
 	{
-		matches := ttree.wildcardMatch("....y")
+		matches := ttree.WildcardMatch("....y")
 		if len(matches) != 1 {
 			t.Errorf("Incorrect match count, expected %d, but got %d", 1, len(matches))
 		}
@@ -126,7 +126,7 @@ func TestWildcardMatch(t *testing.T) {
 	}
 
 	{
-		matches := ttree.wildcardMatch("a.b.t.")
+		matches := ttree.WildcardMatch("a.b.t.")
 		if len(matches) != 1 {
 			t.Errorf("Incorrect match count, expected %d, but got %d", 1, len(matches))
 		}
@@ -136,7 +136,7 @@ func TestWildcardMatch(t *testing.T) {
 	}
 
 	{
-		matches := ttree.wildcardMatch("aba...")
+		matches := ttree.WildcardMatch("aba...")
 		if len(matches) != 1 {
 			t.Errorf("Incorrect match count, expected %d, but got %d", 1, len(matches))
 		}
@@ -146,7 +146,7 @@ func TestWildcardMatch(t *testing.T) {
 	}
 
 	{
-		matches := ttree.wildcardMatch("..a..")
+		matches := ttree.WildcardMatch("..a..")
 		if len(matches) != 4 {
 			t.Errorf("Incorrect match count, expected %d, but got %d", 4, len(matches))
 		}
@@ -172,14 +172,14 @@ func BenchmarkTernaryTreeInsert(b *testing.B) {
 	b.ResetTimer()
 	b.Run(`InsertKeys`, func(b *testing.B) {
 		for _, key := range words {
-			ttree.add(key, key)
+			ttree.Add(key, key)
 		}
 
 	})
 
 	b.Run(`RetrieveKeys`, func(b *testing.B) {
 		for _, key := range words {
-			value, err := ttree.get(key)
+			value, err := ttree.Get(key)
 			if err != nil {
 				b.Errorf("Recieved error while getting %s,%s", key, err)
 			}

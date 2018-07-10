@@ -27,7 +27,7 @@ func New() *TernaryTree {
 }
 
 //Adds new key to the tree.
-func (t *TernaryTree) add(key string, value Item) {
+func (t *TernaryTree) Add(key string, value Item) {
 	if len(strings.TrimSpace(key)) > 1 {
 
 		if !t.contains(key) {
@@ -49,7 +49,7 @@ func (t *TernaryTree) contains(key string) bool {
 }
 
 //Gets saved key from the tree.
-func (t *TernaryTree) get(key string) (Item, error) {
+func (t *TernaryTree) Get(key string) (Item, error) {
 	if len(strings.TrimSpace(key)) < 1 {
 		return nil, nil
 	}
@@ -61,7 +61,7 @@ func (t *TernaryTree) get(key string) (Item, error) {
 }
 
 //Searches tree for keys with common prefix.
-func (t *TernaryTree) prefixMatch(prefix string) []Item {
+func (t *TernaryTree) PrefixMatch(prefix string) []Item {
 	if t.root == nil {
 		return nil
 	}
@@ -78,7 +78,7 @@ func (t *TernaryTree) prefixMatch(prefix string) []Item {
 }
 
 //Searches tree with a wild card to match  keys.
-func (t *TernaryTree) wildcardMatch(pattern string) []Item {
+func (t *TernaryTree) WildcardMatch(pattern string) []Item {
 	if t.root == nil {
 		return nil
 	}
